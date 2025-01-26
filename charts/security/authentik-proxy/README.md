@@ -16,13 +16,20 @@ Configure this chart as a dependency in the application chart as:
 ```yaml
 dependencies:
   - name: authentik-proxy
-    version: "0.1.7"
+    version: "1.1.0"
     repository: oci://harbor.cicd.home/hub-helm/integrations/security
     alias: authentik
     condition: authentik.enabled
 ```
 
 ## Application chart configuration
+
+Following values should already be defined in the global config.
+
+```yaml
+# dns:
+#   rootDomain: ""
+```
 
 Following values can be defined in the application chart after this one has been added as a dependency
 
@@ -36,11 +43,11 @@ authentik:
   # Authentik outpost
   outpost: ""
   # Ingress settings
-  ingress: "" #some-service.some-domain.{{ .Values.global.dns.rootDomain }}
+  ingress:
     # Class to use
     class: ""
-    # Hostname to use
-    host: ""
+    # optional subdomain for the host
+    # subdomain: ""
     # Ingress annotations
     annotations: {}
       # konghq.com/https-redirect-status-code: '301'
