@@ -79,3 +79,14 @@ password: {{ include "authentik.userPassword" . }}
 {{- define "authentik.userPassword" -}}
 {{ randAlphaNum 16 -}}
 {{- end -}}
+
+{{/*
+Host name definition
+*/}}
+{{- define "authentik.ingressHost" -}}
+{{- if .Values.ingress.subdomain -}}
+{{ printf "%s.%s.%s" .Values.name .Values.ingress.subdomain .Values.dns.rootDomain }}
+{{- else -}}
+{{ printf "%s.%s" .Values.name .Values.dns.rootDomain }}
+{{- end }}
+{{- end }}

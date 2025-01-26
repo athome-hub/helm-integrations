@@ -1,3 +1,6 @@
+dns:
+  rootDomain: ""
+
 # Name of the service
 name: "authentik"
 # Service to proxy to; with port
@@ -8,8 +11,8 @@ outpost: ""
 ingress:
   # Class to use
   class: ""
-  # Hostname to use
-  host: ""
+  # optional subdomain for the host
+  # subdomain: ""
   # Ingress annotations
   annotations: {}
     # konghq.com/https-redirect-status-code: '301'

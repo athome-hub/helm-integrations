@@ -12,10 +12,10 @@ spec:
   ingressClassName: {{ .Values.ingress.class }}
   tls:
     - hosts:
-        - {{ tpl .Values.ingress.host . }}
+        - {{ include "authentik.ingressHost" . }}
       secretName: {{ printf "%s-cert" .Values.name }}
   rules:
-    - host: {{ tpl .Values.ingress.host . }}
+    - host: {{ include "authentik.ingressHost" . }}
       http:
         paths:
           - path: /
