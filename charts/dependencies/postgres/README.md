@@ -23,7 +23,8 @@ dependencies:
     alias: postgres
 ```
 
-> [!IMPORTANT] User Secret
+> [!IMPORTANT]  
+> **User Secret**  
 > Requires a Secret defined in the application chart,
 > create a file within the templates directory called `cnpg-user.yaml` with the following content:
 > ```yaml
