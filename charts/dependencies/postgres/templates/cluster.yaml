@@ -1,0 +1,20 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ printf "%s-db" .Values.name }}
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.instances }}
+  superuserSecret:
+    name: {{ printf "%s-db-superuseruser" .Values.name }}
+  bootstrap:
+    initdb:
+      database: {{ printf "%s-db" .Values.name }}
+      owner: {{ .Values.name }}
+      secret:
+        name: {{ printf "%s-db-user" .Values.name }}
+  storage:
+    {{- with .Values.storage }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-auth" .Values.name }}
+  labels:
+    {{- include "authentik.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "authentik.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "authentik.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: auth-proxy
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports: 
+            - name: http
+              containerPort: 2080
+              protocol: TCP
+          command:
+            - caddy
+            - run 
+            - --config
+            - /tmp/Caddyfile
+          volumeMounts:
+            - name: authetik-caddy-config
+              mountPath: /tmp/Caddyfile
+              subPath: Caddyfile
+      volumes:
+        - name: authetik-caddy-config
+          configMap:
+            name: {{ printf "%s-auth-proxy-config" .Values.name }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: postgres-cnpg
+description: home-hub postgres cnpg cluster
+type: application
+
+version: 0.2.4
+appVersion: "1.23.1"

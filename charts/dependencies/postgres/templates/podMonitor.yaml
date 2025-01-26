@@ -1,0 +1,15 @@
+{{- if .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ printf "%s-db-monitor" .Values.name }}
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+    forPrometheus: home
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/cluster: {{ printf "%s-db" .Values.name }}
+  podMetricsEndpoints:
+  - port: metrics
+{{- end }}

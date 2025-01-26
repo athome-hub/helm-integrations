@@ -1,0 +1,25 @@
+# Name of the service
+name: "authentik"
+# Service to proxy to; with port
+backend: <serice>:<port>
+# Authentik outpost
+outpost: ""
+# Ingress settings
+ingress:
+  # Class to use
+  class: ""
+  # Hostname to use
+  host: ""
+  # Ingress annotations
+  annotations: {}
+    # konghq.com/https-redirect-status-code: '301'
+    # konghq.com/protocols: https
+    # cert-manager.io/cluster-issuer: ai-inter-ca
+
+replicaCount: 1
+
+# Proxy Image settings
+image:
+  repository: caddy
+  tag: 2-alpine
+  pullPolicy: IfNotPresent

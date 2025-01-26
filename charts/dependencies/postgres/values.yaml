@@ -1,0 +1,10 @@
+# Database name
+name: ""
+
+# Number of instances, must be odd number
+instances: 3
+
+# Storage control for the cnpg cluster
+storage:
+  storageClass: "" #personal
+  size: 1Gi
