@@ -48,6 +48,6 @@ authentik:
       # cert-manager.io/cluster-issuer: ai-inter-ca
 ```
 
-> [!IMPORTANT] Built-in ingress  
+> [!IMPORTANT]  
 > Ensure the built-in ingress of the application chart is disabled when using the proxy.  
 > All traffic going to the application will run through the proxy to enable authentication.  
