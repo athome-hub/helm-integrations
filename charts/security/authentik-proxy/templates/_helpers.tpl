@@ -84,9 +84,9 @@ password: {{ include "authentik.userPassword" . }}
 Host name definition
 */}}
 {{- define "authentik.ingressHost" -}}
-{{- if .Values.ingress.subdomain -}}
-{{ printf "%s.%s.%s" .Values.name .Values.ingress.subdomain .Values.dns.rootDomain }}
+{{- if .Values.subDomain -}}
+{{ printf "%s.%s.%s" .Values.name .Values.subDomain .Values.rootDomain }}
 {{- else -}}
-{{ printf "%s.%s" .Values.name .Values.dns.rootDomain }}
+{{ printf "%s.%s" .Values.name .Values.rootDomain }}
 {{- end }}
 {{- end }}
