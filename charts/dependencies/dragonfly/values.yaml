@@ -1,0 +1,13 @@
+# Cluster name
+name: ""
+
+# Number of instances
+instances: 3
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 500Mi
+  limits:
+    cpu: 600m
+    memory: 750Mi

@@ -1,0 +1,17 @@
+{{- if .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ printf "%s-dragonfly-monitor" .Values.name }}
+  labels:
+    {{- include "dragonfly.labels" . | nindent 4 }}
+    forPrometheus: home
+spec:
+  selector:
+    matchLabels:
+      app: {{ printf "%s-dragonfly" .Values.name }}
+  fallbackScrapeProtocol: PrometheusText1.0.0
+  podMetricsEndpoints:
+  - port: admin
+{{- end }}
+
