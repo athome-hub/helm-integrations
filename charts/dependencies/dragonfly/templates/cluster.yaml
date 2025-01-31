@@ -1,0 +1,13 @@
+apiVersion: dragonflydb.io/v1alpha1
+kind: Dragonfly
+metadata:
+  name: {{ printf "%s-dragonfly" .Values.name }}
+  labels:
+    app: {{ printf "%s-dragonfly" .Values.name }}
+    {{- include "dragonfly.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.instances }}
+  {{- with .Values.resources }}
+  resources:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
