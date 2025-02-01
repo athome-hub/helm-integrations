@@ -14,6 +14,23 @@ spec:
       owner: {{ .Values.name }}
       secret:
         name: {{ printf "%s-db-user" .Values.name }}
+{{- if .Values.global.cnpgBackup.enabled }}
+  backup:
+    barmanObjectStore:
+      destinationPath: {{ .Values.global.cnpgBackup.destinationPath }}
+      endpointURL: {{ .Values.global.cnpgBackup.endpointURL }}
+      endpointCA: 
+        key: ca.crt
+        name: app-inter-ca
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-backup
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-backup
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: {{ .Values.global.cnpgBackup.retentionPolicy | quote }}
+{{- end }}
   storage:
     {{- with .Values.storage }}
     {{- toYaml . | nindent 4 }}

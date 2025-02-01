@@ -18,7 +18,7 @@ Dependencies configured in the Helm chart as:
 ```yaml
 dependencies:
   - name: postgres-cnpg
-    version: 0.2.4
+    version: 0.3.2
     repository: oci://ghcr.io/athome-hub/helm-integrations
     alias: postgres
 ```
@@ -59,6 +59,27 @@ postgres:
     storageClass: personal # Storage class to use
     size: 1Gi # Define Volume size for DB, defaults to 1Gi
 ```
+
+#### Backups
+
+Configure the following for backups
+
+```yaml
+global:
+  cnpgBackup:
+    enabled: true
+    accessKey: <accessKey>
+    secretKey: <secretKey>
+    endpointURL: https://s3.backup.nas.athome:9000
+    destinationPath: s3://cnpg/athome
+    retentionPolicy: 30d
+```
+
+This also needs the `apps.core` stack installed to ensure the secret is present.  
+
+> [!CAUTION]  
+> It relies on an `app-inter-ca` secret that has a `ca.crt` key in it.  
+> This is intended for a minio local cluster, to do proper certificate validation. 
 
 ### Application DB connection string
 
