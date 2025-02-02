@@ -9,7 +9,7 @@ global:
 #     retentionPolicy: 30d
 
 # Database name
-name: "test"
+name: ""
 
 # Specific container image to use
 imageName: ""
