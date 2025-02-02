@@ -7,6 +7,10 @@ metadata:
     {{- include "dragonfly.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.instances }}
+  {{- with .Values.extraArgs }}
+  args:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   {{- with .Values.resources }}
   resources:
     {{- toYaml . | nindent 4 }}

@@ -4,6 +4,12 @@ name: ""
 # Number of instances
 instances: 3
 
+# extra arguments for the cluster
+extraArgs: []
+  # - --default_lua_flags
+  # - allow-undeclared-keys
+
+# Resource specs
 resources:
   requests:
     cpu: 500m
