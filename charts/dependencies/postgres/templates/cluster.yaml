@@ -6,6 +6,9 @@ metadata:
     {{- include "postgres.labels" . | nindent 4 }}
 spec:
   instances: {{ .Values.instances }}
+  {{- with .Values.imageName }}
+  imageName: {{ . }}
+  {{- end }}
   superuserSecret:
     name: {{ printf "%s-db-superuseruser" .Values.name }}
   bootstrap:
@@ -14,6 +17,15 @@ spec:
       owner: {{ .Values.name }}
       secret:
         name: {{ printf "%s-db-user" .Values.name }}
+      {{- with .Values.initdb.postInitApplicationSQL }}
+      postInitApplicationSQL:
+        {{- . | toYaml | nindent 8 }}
+      {{- end }}
+      {{- with .Values.initdb.extraArgs }}
+      {{- range $k, $v := . }}
+      {{ $k }}: {{ $v }}
+      {{- end }}
+      {{- end }}
 {{- if .Values.global.cnpgBackup.enabled }}
   backup:
     barmanObjectStore:
