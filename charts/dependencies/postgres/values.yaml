@@ -1,7 +1,7 @@
 # Backup arguments
-# global:
-#   cnpgBackup:
-#     enabled: true
+global:
+  cnpgBackup:
+    enabled: false
 #     accessKey: <accessKey>
 #     secretKey: <secretKey>
 #     endpointURL: # https://s3.backup.nas.athome:9000
