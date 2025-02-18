@@ -24,6 +24,16 @@ dragonfly:
   instances: 3 # Number of instances, defaults to 3
 ```
 
+### extraArgs
+
+Some applications might require additional arguments to be passed to the cluster, this can be done using the `extraArgs` key. 
+
+```yaml
+extraArgs: 
+  - --default_lua_flags
+  - allow-undeclared-keys
+```
+
 ### Application redis connection string
 
 The redis host is going to be available at `<name>-dragonfly`

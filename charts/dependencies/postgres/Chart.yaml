@@ -3,5 +3,5 @@ name: postgres-cnpg
 description: home-hub postgres cnpg cluster
 type: application
 
-version: 0.3.2
-appVersion: "1.23.1"
+version: 0.4.3
+appVersion: "1.25.0"

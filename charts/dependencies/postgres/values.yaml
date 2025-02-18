@@ -1,7 +1,7 @@
 # Backup arguments
-# global:
-#   cnpgBackup:
-#     enabled: true
+global:
+  cnpgBackup:
+    enabled: false
 #     accessKey: <accessKey>
 #     secretKey: <secretKey>
 #     endpointURL: # https://s3.backup.nas.athome:9000
@@ -11,8 +11,20 @@
 # Database name
 name: ""
 
+# Specific container image to use
+imageName: ""
+
 # Number of instances, must be odd number
 instances: 3
+
+# Additional arguments to the initdb statement
+initdb:
+  postInitApplicationSQL: []
+    # - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+    # - SET search_path TO "$user", public, vectors;
+    # - CREATE EXTENSION IF NOT EXISTS "vectors";
+  extraArgs: {}
+    # dataChecksums: true
 
 # Storage control for the cnpg cluster
 storage:
