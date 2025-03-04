@@ -17,6 +17,7 @@ spec:
       {{- end }}
       labels:
         {{- include "authentik.selectorLabels" . | nindent 8 }}
+        config.checksum: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum | trunc 63 }}
     spec:
       containers:
         - name: auth-proxy
@@ -35,6 +36,8 @@ spec:
             - name: authetik-caddy-config
               mountPath: /tmp/Caddyfile
               subPath: Caddyfile
+          resources: 
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: authetik-caddy-config
           configMap:
