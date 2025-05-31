@@ -118,3 +118,42 @@ The above is a [Deployment](https://kubernetes.io/docs/concepts/workloads/contro
 
 This is important as it allows random passwords to be generated, increasing the application security.
 
+### Advanced Configuration
+
+#### extraArgs
+
+Extra arguments can be passed to the DB during the creation phase.  
+These can be configured as follows:  
+```yaml
+postgres:
+  initdb:
+    extraArgs:
+      dataChecksums: true
+      encoding: "UTF8"
+```
+
+All extra arguments can be found in the [official docs for Cloudnative-PG](https://cloudnative-pg.io/documentation/1.18/bootstrap/#bootstrap-an-empty-cluster-initdb).
+
+#### postInitApplicationSQL
+
+Extra SQL statements that can be executed when the database is created  
+```yaml
+postgres:
+  initdb:
+    postInitApplicationSQL:
+      - CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
+      - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
+```
+
+#### config
+
+Additional postgres configuration options, as described [here](https://cloudnative-pg.io/documentation/1.16/postgresql_conf/).
+
+Only certain options are available:  
+
+> **sharedPreloadLibraries**
+> ```yaml
+> config:
+>   sharedPreloadLibraries: 
+>     - vchord.so
+> ```
