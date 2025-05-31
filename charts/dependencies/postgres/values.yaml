@@ -26,6 +26,11 @@ initdb:
   extraArgs: {}
     # dataChecksums: true
 
+# Additional postgres configuration
+config:
+  sharedPreloadLibraries: []
+    # - vchord.so
+
 # Storage control for the cnpg cluster
 storage:
   storageClass: "" #personal

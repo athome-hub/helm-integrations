@@ -26,12 +26,21 @@ spec:
       {{ $k }}: {{ $v }}
       {{- end }}
       {{- end }}
+  {{- if .Values.config.sharedPreloadLibraries }}
+  postgresql:
+    {{- with .Values.config.sharedPreloadLibraries }}
+    shared_preload_libraries:
+      {{- range . }}
+      - {{ . | quote }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
 {{- if .Values.global.cnpgBackup.enabled }}
   backup:
     barmanObjectStore:
       destinationPath: {{ .Values.global.cnpgBackup.destinationPath }}
       endpointURL: {{ .Values.global.cnpgBackup.endpointURL }}
-      endpointCA: 
+      endpointCA:
         key: ca.crt
         name: app-inter-ca
       s3Credentials:
